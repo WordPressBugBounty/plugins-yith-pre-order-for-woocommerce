@@ -45,13 +45,10 @@ if ( ! class_exists( 'YITH_Pre_Order_Utils' ) ) {
 				$product_id = apply_filters( 'wpml_object_id', $product_id, 'product', true, wpml_get_default_language() );
 			}
 
-			if ( isset( YITH_Pre_Order_Frontend()->pre_orders[ $product_id ] ) ) {
-				$product = YITH_Pre_Order_Frontend()->pre_orders[ $product_id ];
-			} else {
-				if ( $product instanceof WC_Product ) {
-					YITH_Pre_Order_Frontend()->pre_orders[ $product_id ] = $product;
+			if ( function_exists( 'YITH_Pre_Order_Frontend' ) ) {
+				if ( isset( YITH_Pre_Order_Frontend()->pre_orders[ $product_id ] ) ) {
+					$product = YITH_Pre_Order_Frontend()->pre_orders[ $product_id ];
 				} else {
-
 					$product = wc_get_product( $product_id );
 					if ( $product && $product->exists() ) {
 						YITH_Pre_Order_Frontend()->pre_orders[ $product_id ] = $product;
@@ -60,6 +57,10 @@ if ( ! class_exists( 'YITH_Pre_Order_Utils' ) ) {
 			}
 
 			if ( 'simple' === $product->get_type() || 'variation' === $product->get_type() ) {
+				// Backward compatibility.
+				if ( apply_filters( 'ywpo_enable_backward_compatibility_mode', false, $product ) ) {
+					return 'yes' === self::get_pre_order_status( $product );
+				}
 				if ( function_exists( 'ywpo_automatic_pre_order_check' ) && ywpo_automatic_pre_order_check( $product ) ) {
 					$return = true;
 				} elseif ( 'yes' === self::get_pre_order_status( $product ) && 'outofstock' !== $product->get_stock_status( 'edit' ) ) {

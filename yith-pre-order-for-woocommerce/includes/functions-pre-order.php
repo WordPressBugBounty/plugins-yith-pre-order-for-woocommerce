@@ -284,11 +284,9 @@ if ( ! function_exists( 'ywpo_availability_date_not_ready' ) ) {
 	function ywpo_availability_date_not_ready( $product ) {
 		$return = false;
 
-		$pre_order  = ywpo_get_pre_order( $product );
-		$start_mode = $pre_order->get_start_mode();
-
+		$start_mode = YITH_Pre_Order_Utils::get_start_mode( $product );
 		if ( 'date' === $start_mode ) {
-			$timestamp = $pre_order->get_start_date_timestamp();
+			$timestamp = YITH_Pre_Order_Utils::get_start_date_timestamp( $product );
 			if ( $timestamp > time() ) {
 				$return = true;
 			}
@@ -305,7 +303,6 @@ if ( ! function_exists( 'ywpo_reset_product' ) ) {
 	 * @param WC_Product $product The WC_Order object.
 	 */
 	function ywpo_reset_pre_order( $product ) {
-		$id    = $product->get_id();
 		$metas = apply_filters(
 			'ywpo_reset_pre_order_product_post_meta',
 			array(
@@ -337,8 +334,10 @@ if ( ! function_exists( 'ywpo_reset_product' ) ) {
 		);
 
 		foreach ( $metas as $meta ) {
-			delete_post_meta( $id, $meta );
+			$product->delete_meta_data( $meta );
 		}
+
+		$product->save();
 
 		do_action( 'yith_ywpo_clear_pre_order_product', $product );
 	}

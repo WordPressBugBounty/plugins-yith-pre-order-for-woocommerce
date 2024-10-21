@@ -18,14 +18,14 @@ if ( ! defined( 'ABSPATH' ) || ! defined( 'YITH_WCPO_VERSION' ) ) {
 
 return array(
 	'general' => apply_filters(
-		'ywpo_general_options',
+		'ywpo_free_general_options',
 		array(
 			'general_options_start'   => array(
 				'id'   => 'ywpo_general_options_start',
 				'type' => 'sectionstart',
 			),
-			'general_options_title'   => array(
-				'name' => __( 'General Options', 'yith-pre-order-for-woocommerce' ),
+			'general_title'           => array(
+				'name' => __( 'Plugin Options', 'yith-pre-order-for-woocommerce' ),
 				'id'   => 'ywpo_general_options_title',
 				'type' => 'title',
 				'desc' => '',
@@ -38,7 +38,7 @@ return array(
 				'yith-type' => 'onoff',
 				'default'   => 'yes',
 			),
-			'remove_pre_order_status' => array(
+			'remove_pre_order_status'        => array(
 				'name'      => __( 'Disable pre-order mode when the product becomes available', 'yith-pre-order-for-woocommerce' ),
 				'desc'      => __( 'Enable to automatically remove the pre-order mode when the availability date is reached. If this option is disabled, you will need to remove the pre-order status manually on the product page.', 'yith-pre-order-for-woocommerce' ),
 				'id'        => 'yith_wcpo_enable_pre_order_purchasable',

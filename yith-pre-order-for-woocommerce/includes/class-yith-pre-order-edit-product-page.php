@@ -125,9 +125,7 @@ if ( ! class_exists( 'YITH_Pre_Order_Edit_Product_Page' ) ) {
 		 * @return array
 		 */
 		private static function get_pre_order_post_meta( $id ) {
-
 			$product   = wc_get_product( $id );
-			$pre_order = ywpo_get_pre_order( $product );
 
 			$pre_order_status = 'yes' === $product->get_meta( '_ywpo_preorder' ) ? 'yes' : 'no';
 
@@ -135,12 +133,12 @@ if ( ! class_exists( 'YITH_Pre_Order_Edit_Product_Page' ) ) {
 			if ( ! metadata_exists( 'post', $id, '_ywpo_availability_date_mode' ) && metadata_exists( 'post', $id, '_ywpo_for_sale_date' ) ) {
 				$availability_date_mode = 'date';
 			} else {
-				$availability_date_mode = metadata_exists( 'post', $id, '_ywpo_availability_date_mode' ) ? $pre_order->get_availability_date_mode() : 'no_date';
+				$availability_date_mode = metadata_exists( 'post', $id, '_ywpo_availability_date_mode' ) ? YITH_Pre_Order_Utils::get_availability_date_mode( $product ) : 'no_date';
 			}
 
-			$availability_date = $pre_order->get_for_sale_date();
+			$availability_date = YITH_Pre_Order_Utils::get_for_sale_date( $product );
 
-			$preorder_price = metadata_exists( 'post', $id, '_ywpo_preorder_price' ) ? $pre_order->get_pre_order_price() : 0;
+			$preorder_price = metadata_exists( 'post', $id, '_ywpo_preorder_price' ) ? YITH_Pre_Order_Utils::get_pre_order_price( $product ) : 0;
 
 			// Backward compatibility.
 			if ( ! metadata_exists( 'post', $id, '_ywpo_price_mode' ) && metadata_exists( 'post', $id, '_ywpo_preorder_price' ) ) {
@@ -183,18 +181,17 @@ if ( ! class_exists( 'YITH_Pre_Order_Edit_Product_Page' ) ) {
 					}
 				}
 			} else {
-				$price_mode          = metadata_exists( 'post', $id, '_ywpo_price_mode' ) ? $pre_order->get_price_mode() : 'default';
-				$discount_percentage = $pre_order->get_discount_percentage();
-				$discount_fixed      = $pre_order->get_discount_fixed();
-				$increase_percentage = $pre_order->get_increase_percentage();
-				$increase_fixed      = $pre_order->get_increase_fixed();
+				$price_mode          = metadata_exists( 'post', $id, '_ywpo_price_mode' ) ? YITH_Pre_Order_Utils::get_price_mode( $product ) : 'default';
+				$discount_percentage = YITH_Pre_Order_Utils::get_discount_percentage( $product );
+				$discount_fixed      = YITH_Pre_Order_Utils::get_discount_fixed( $product );
+				$increase_percentage = YITH_Pre_Order_Utils::get_increase_percentage( $product );
+				$increase_fixed      = YITH_Pre_Order_Utils::get_increase_fixed( $product );
 			}
 
 			return apply_filters(
 				'ywpo_get_pre_order_post_meta',
 				array(
 					'product'                => $product,
-					'pre_order'              => $pre_order,
 					'pre_order_status'       => $pre_order_status,
 					'availability_date_mode' => $availability_date_mode,
 					'availability_date'      => $availability_date,
@@ -246,36 +243,29 @@ if ( ! class_exists( 'YITH_Pre_Order_Edit_Product_Page' ) ) {
 					return;
 				}
 
-				$pre_order = ywpo_get_pre_order( $post_id );
-
-				if ( ! isset( $_POST['_ywpo_preorder'] ) ) {
-					$pre_order->set_pre_order_status( 'no' );
-					return;
-				}
-
 				$is_pre_order = ! empty( $_POST['_ywpo_preorder'] ) ? 'yes' : 'no';
-				$pre_order->set_pre_order_status( $is_pre_order );
+				YITH_Pre_Order_Utils::set_pre_order_status( $product, $is_pre_order );
 
 				$availability_date_mode = isset( $_POST['_ywpo_availability_date_mode'] ) ? sanitize_text_field( wp_unslash( $_POST['_ywpo_availability_date_mode'] ) ) : '';
-				$pre_order->set_availability_date_mode( $availability_date_mode );
+				YITH_Pre_Order_Utils::set_availability_date_mode( $product, $availability_date_mode );
 
 				$new_release_date = (string) isset( $_POST['_ywpo_for_sale_date'] ) ? sanitize_text_field( wp_unslash( $_POST['_ywpo_for_sale_date'] ) ) : '';
-				$pre_order->set_for_sale_date( $new_release_date );
+				YITH_Pre_Order_Utils::set_for_sale_date( $product, $new_release_date );
 
 				$price_mode = isset( $_POST['_ywpo_price_mode'] ) ? sanitize_text_field( wp_unslash( $_POST['_ywpo_price_mode'] ) ) : '';
-				$pre_order->set_price_mode( $price_mode );
+				YITH_Pre_Order_Utils::set_price_mode( $product, $price_mode );
 
 				$pre_order_price = isset( $_POST['_ywpo_preorder_price'] ) ? wc_format_decimal( sanitize_text_field( wp_unslash( $_POST['_ywpo_preorder_price'] ) ) ) : '';
-				$pre_order->set_pre_order_price( $pre_order_price );
+				YITH_Pre_Order_Utils::set_pre_order_price( $product, $pre_order_price );
 
 				$discount_percentage = isset( $_POST['_ywpo_preorder_discount_percentage'] ) ? sanitize_text_field( wp_unslash( $_POST['_ywpo_preorder_discount_percentage'] ) ) : '';
-				$pre_order->set_discount_percentage( $discount_percentage );
+				YITH_Pre_Order_Utils::set_discount_percentage( $product, $discount_percentage );
 				$discount_fixed = isset( $_POST['_ywpo_preorder_discount_fixed'] ) ? sanitize_text_field( wp_unslash( $_POST['_ywpo_preorder_discount_fixed'] ) ) : '';
-				$pre_order->set_discount_fixed( $discount_fixed );
+				YITH_Pre_Order_Utils::set_discount_fixed( $product, $discount_fixed );
 				$increase_percentage = isset( $_POST['_ywpo_preorder_increase_percentage'] ) ? sanitize_text_field( wp_unslash( $_POST['_ywpo_preorder_increase_percentage'] ) ) : '';
-				$pre_order->set_increase_percentage( $increase_percentage );
+				YITH_Pre_Order_Utils::set_increase_percentage( $product, $increase_percentage );
 				$increase_fixed = isset( $_POST['_ywpo_preorder_increase_fixed'] ) ? sanitize_text_field( wp_unslash( $_POST['_ywpo_preorder_increase_fixed'] ) ) : '';
-				$pre_order->set_increase_fixed( $increase_fixed );
+				YITH_Pre_Order_Utils::set_increase_fixed( $product, $increase_fixed );
 			}
 		}
 
@@ -287,36 +277,31 @@ if ( ! class_exists( 'YITH_Pre_Order_Edit_Product_Page' ) ) {
 		 */
 		public function update_variation_post_meta( $post_id, $_i ) {
 			// phpcs:disable WordPress.Security.NonceVerification.Missing
-			$pre_order = ywpo_get_pre_order( $post_id );
-
-			if ( ! isset( $_POST['_ywpo_preorder'][ $_i ] ) ) {
-				$pre_order->set_pre_order_status( 'no' );
-				return;
-			}
+			$product = wc_get_product( $post_id );
 
 			$is_pre_order = ! empty( $_POST['_ywpo_preorder'][ $_i ] ) ? 'yes' : 'no';
-			$pre_order->set_pre_order_status( $is_pre_order );
+			YITH_Pre_Order_Utils::set_pre_order_status( $product, $is_pre_order );
 
 			$availability_date_mode = isset( $_POST['_ywpo_availability_date_mode'][ $_i ] ) ? sanitize_text_field( wp_unslash( $_POST['_ywpo_availability_date_mode'][ $_i ] ) ) : '';
-			$pre_order->set_availability_date_mode( $availability_date_mode );
+			YITH_Pre_Order_Utils::set_availability_date_mode( $product, $availability_date_mode );
 
 			$new_release_date = (string) isset( $_POST['_ywpo_for_sale_date'][ $_i ] ) ? sanitize_text_field( wp_unslash( $_POST['_ywpo_for_sale_date'][ $_i ] ) ) : '';
-			$pre_order->set_for_sale_date( $new_release_date );
+			YITH_Pre_Order_Utils::set_for_sale_date( $product, $new_release_date );
 
 			$price_mode = isset( $_POST['_ywpo_price_mode'][ $_i ] ) ? sanitize_text_field( wp_unslash( $_POST['_ywpo_price_mode'][ $_i ] ) ) : '';
-			$pre_order->set_price_mode( $price_mode );
+			YITH_Pre_Order_Utils::set_price_mode( $product, $price_mode );
 
 			$pre_order_price = isset( $_POST['_ywpo_preorder_price'][ $_i ] ) ? wc_format_decimal( sanitize_text_field( wp_unslash( $_POST['_ywpo_preorder_price'][ $_i ] ) ) ) : '';
-			$pre_order->set_pre_order_price( $pre_order_price );
+			YITH_Pre_Order_Utils::set_pre_order_price( $product, $pre_order_price );
 
 			$discount_percentage = isset( $_POST['_ywpo_preorder_discount_percentage'][ $_i ] ) ? sanitize_text_field( wp_unslash( $_POST['_ywpo_preorder_discount_percentage'][ $_i ] ) ) : '';
-			$pre_order->set_discount_percentage( $discount_percentage );
+			YITH_Pre_Order_Utils::set_discount_percentage( $product, $discount_percentage );
 			$discount_fixed = isset( $_POST['_ywpo_preorder_discount_fixed'][ $_i ] ) ? sanitize_text_field( wp_unslash( $_POST['_ywpo_preorder_discount_fixed'][ $_i ] ) ) : '';
-			$pre_order->set_discount_fixed( $discount_fixed );
+			YITH_Pre_Order_Utils::set_discount_fixed( $product, $discount_fixed );
 			$increase_percentage = isset( $_POST['_ywpo_preorder_increase_percentage'][ $_i ] ) ? sanitize_text_field( wp_unslash( $_POST['_ywpo_preorder_increase_percentage'][ $_i ] ) ) : '';
-			$pre_order->set_increase_percentage( $increase_percentage );
+			YITH_Pre_Order_Utils::set_increase_percentage( $product, $increase_percentage );
 			$increase_fixed = isset( $_POST['_ywpo_preorder_increase_fixed'][ $_i ] ) ? sanitize_text_field( wp_unslash( $_POST['_ywpo_preorder_increase_fixed'][ $_i ] ) ) : '';
-			$pre_order->set_increase_fixed( $increase_fixed );
+			YITH_Pre_Order_Utils::set_increase_fixed( $product, $increase_fixed );
 		}
 
 		/**

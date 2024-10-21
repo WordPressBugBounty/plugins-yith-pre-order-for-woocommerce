@@ -241,8 +241,6 @@ if ( ! class_exists( 'YITH_Pre_Order_Frontend' ) ) {
 		 * @param int                   $order_id Order ID.
 		 */
 		public function add_order_item_meta( $item_id, $item, $order_id ) {
-			global $sitepress;
-
 			$order = wc_get_order( $order_id );
 
 			if ( 'line_item' !== $item->get_type() || ! $order instanceof WC_Order ) {
@@ -256,8 +254,6 @@ if ( ! class_exists( 'YITH_Pre_Order_Frontend' ) ) {
 					$order->update_meta_data( '_order_has_preorder', apply_filters( 'ywpo_order_has_preorder', 'yes', $order, $product, $item ) );
 					$order->update_meta_data( '_ywpo_status', apply_filters( 'ywpo_status', 'waiting', $order, $product, $item ) );
 				}
-
-				//$pre_order = ywpo_get_pre_order( $product );
 
 				$item->update_meta_data( '_ywpo_item_preorder', apply_filters( 'ywpo_item_preorder', 'yes', $item, $product, $order ) );
 				$item->update_meta_data( '_ywpo_item_status', apply_filters( 'ywpo_item_status', 'waiting', $item, $product, $order ) );
@@ -583,7 +579,7 @@ if ( ! class_exists( 'YITH_Pre_Order_Frontend' ) ) {
 				$availability_label = str_replace( '{availability_time}', '<span class="availability_time">' . $time . '</span>', $availability_label );
 				$availability_label = apply_filters( 'yith_ywpo_availability_date_no_auto_label', nl2br( $availability_label ), $product->get_id(), $timestamp, $date, $time );
 
-				return '<div class="ywpo_availability_date ' . $context . '-no-auto-format">' . $availability_label . '</div>';
+				return '<div class="ywpo_availability_date ' . $context . '-no-auto-format" style="margin-bottom: 20px;">' . $availability_label . '</div>';
 
 			}
 

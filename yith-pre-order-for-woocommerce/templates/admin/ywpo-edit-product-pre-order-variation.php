@@ -91,7 +91,7 @@ $offset_label = '(' . ywpo_get_timezone_offset_label() . ')';
 				?>
 				<?php yith_plugin_fw_get_field( $availability_date_field, true ); ?>
 				<span class="yith-icon yith-icon-calendar yith-icon--right-overlay"></span>
-				<?php echo wc_help_tip( esc_html__( 'Set the date when the product will become available for sale. The timezone used is the WordPress local timezone. Settings -> General -> Timezone.', 'yith-pre-order-for-woocommerce' ) ); /* phpcs:ignore WordPress.XSS.EscapeOutput.OutputNotEscaped */ ?>
+				<?php echo wc_help_tip( esc_html__( 'Set the date when the product will become available for sale. The timezone used is the WordPress local timezone in Settings -> General -> Timezone.', 'yith-pre-order-for-woocommerce' ) ); /* phpcs:ignore WordPress.XSS.EscapeOutput.OutputNotEscaped */ ?>
 				<span class="ywpo-description"><?php esc_html_e( 'Set the date when this product will become available.', 'yith-pre-order-for-woocommerce' ); ?></span>
 			</fieldset>
 

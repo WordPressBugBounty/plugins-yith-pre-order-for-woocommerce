@@ -61,7 +61,7 @@ if ( ! class_exists( 'YITH_Pre_Order_My_Account' ) ) {
 			if ( $order instanceof WC_Order ) {
 				if ( ywpo_order_has_pre_order( $order ) ) {
 					echo wp_kses_post( wc_get_order_status_name( $order->get_status() ) );
-					$label  = apply_filters( 'ywpo_pre_order_flag_my_account_orders_label', __( 'Has pre-order item(s)', 'yith-pre-order-for-woocommerce' ), $order );
+					$label  = apply_filters( 'ywpo_pre_order_flag_my_account_orders_label', __( 'Includes pre-order item(s)', 'yith-pre-order-for-woocommerce' ), $order );
 					$output = apply_filters( 'ywpo_pre_order_flag_my_account_orders_output', '<br><mark>' . $label . '</mark>', $order, $label );
 					echo wp_kses_post( $output );
 				} else {
@@ -209,7 +209,7 @@ if ( ! class_exists( 'YITH_Pre_Order_My_Account' ) ) {
 		 * @return array
 		 */
 		public function new_menu_items( $items ) {
-			if ( count( ywpo_get_orders_by_customer( get_current_user_id() ) ) > 0 ) {
+			if ( apply_filters( 'ywpo_count_customer_orders', count( ywpo_get_orders_by_customer( get_current_user_id() ) ) > 0 ) ) {
 				// Remove the logout menu item.
 				$logout = $items['customer-logout'];
 				unset( $items['customer-logout'] );

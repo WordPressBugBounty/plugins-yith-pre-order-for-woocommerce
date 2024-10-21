@@ -195,7 +195,7 @@ if ( ! class_exists( 'YITH_Pre_Order_Product' ) ) {
 		 * @return string
 		 */
 		public function get_dynamic_availability_date() {
-			$dynamic_availability_date = $this->product->get_meta( $this->id, '_ywpo_dynamic_availability_date' );
+			$dynamic_availability_date = $this->product->get_meta( '_ywpo_dynamic_availability_date' );
 			return apply_filters( 'yith_ywpo_pre_order_get_dynamic_availability_date', $dynamic_availability_date, $this->id, $this->product );
 		}
 
@@ -226,7 +226,7 @@ if ( ! class_exists( 'YITH_Pre_Order_Product' ) ) {
 		 * @return string
 		 */
 		public function get_max_qty() {
-			$max_qty = $this->product->get_meta( $this->id, '_ywpo_max_qty' );
+			$max_qty = $this->product->get_meta( '_ywpo_max_qty' );
 			return apply_filters( 'yith_ywpo_pre_order_get_max_qty', $max_qty, $this->id, $this->product );
 		}
 

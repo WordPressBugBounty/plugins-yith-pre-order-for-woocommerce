@@ -4,35 +4,51 @@ Contributors: yithemes
 Tags: pre order, pre-order, preorder, pre-arrange, woocommerce, for woocommerce, e-commerce, shop, yith, yithemes
 Requires at least: 6.4
 Tested up to: 6.6
-Stable tag: 2.27.0
+Stable tag: 3.0.0
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Allow your customers to pre-order their long-awaited product before it's made available and increase sales that could be otherwise lost for ever.
+With YITH Pre-Order for WooCommerce you can enable a pre-sales system in your shop, increase your customers' interest in soon-to-be-released products and get cash flow in advance to cover the costs of production/promotion.
 
-== Description ==
+== How does it work? ==
 
-Do you want to sell products that are not on stock yet, but you know that you'll have them?
-Pre-Order is the solution for you. Customers will be able to buy your products, despite knowing that you haven't them yet. It's better than not
-selling them at all!
-All you have to do is: mark the products (simple product or the specific variation) as "Pre-Order" and give them an 'additional stock' that you
-know you'll have. In addition, customers will see a customizable message on the Add to cart button, like "Pre-Order this product now!".
-Then, customers will be able to purchase the products, and you'll receive an email any time a Pre-Order product is sold.
+With this free plugin, you can easily manage the pre-sale of your products and create a marketing strategy similar to that used by large e-commerce stores such as Amazon, Apple, Nike, and Nintendo. You’ll be able to change the "Add to cart" button label to "Pre-order", set a release date for your products, and send an email notification to your customers when the products they pre-ordered become available in your store.
 
-Increase your sales with Pre-Order!
+Do you want to offer an incentive to push customers to pre-order products? The winning strategy is to offer a special discount on the price of your products only to those who pre-order them (e.g. "Get $50 off only if you pre-order the new smartphone now!").
 
-= Main features =
+= Free version options =
 
-* Mark simple products and variations as Pre-Order.
-* Change 'Add to cart' text on Pre-Order products.
-* Notify admin if a Pre-Order product is purchased.
-* Notify customers which purchased products are Pre-Order.
-* Set an availability date for the pre-order products.
-* Modify the price on the pre-order products.
+* Select in which products to enable the pre-order mode
+* Disable pre-order mode manually or automatically if you select a release/availability date (and time)
+* Customize the label and colors of the "Add to cart" button in the "Frequently Bought Together" section
+* Set a fixed price for products in pre-order mode (e.g. $100 when pre-order mode is enabled, $120 when it is disabled)
+* Apply a discount (or the opposite, increase the product price) when customers purchase a pre-order product
+* Charge the product price the moment the customer places the pre-order
+* Receive an email as admin when a customer pre-orders a product
+* Send an email to customers when they pre-order a product
 
-Discover all the features of YITH Pre-Order for WooCommerce and install it in your theme: the result will be extremely satisfying.
+Want to see the plugin in action? Check out the [live demo >](https://plugins.yithemes.com/yith-woocommerce-pre-order-free/)
 
+
+= Need more options? Go for the premium version! =
+
+With the premium version, you can unlock advanced features and build an even more effective pre-sale strategy in your shop.
+With the premium version, you can:
+
+* Enable pre-order mode automatically on all unavailable/out-of-stock products
+* Hide pre-order prices from unregistered users
+* Allow only specific users or user roles to pre-order products
+* Charge an extra fee for each pre-order (e.g. add a $5 fee to all orders that contain a pre-order product)
+* Offer free shipping for products purchased in pre-order mode
+* Allow customers to manually pay for the products when they become available in your shop (through the "Pay Later" option at checkout)
+* Charge the product price automatically to your customers' credit cards upon release (only available if you use a supported payment gateway)
+* Receive extra notifications as admin (when pre-order mode is enabled in an unavailable product, when a product release date is approaching, etc.)
+* Send extra notifications to customers (when the product release date is changed, to remind them about the pending payment, etc.)
+* Get regular plugin updates and access to the technical support area
+... and more!
+
+Try out the premium version [live demo >](https://plugins.yithemes.com/yith-woocommerce-pre-order/)
 
 = Languages =
 
@@ -47,14 +63,6 @@ Available languages:
 Take advantage of [WPML](https://wpml.org/?aid=24889&affiliate_key=Qn1wDeBNTcZV) compatibility. Feel free to translate your plugin easily using the most popular and powerful tool for multi-language sites, [WPML](https://wpml.org/?aid=24889&affiliate_key=Qn1wDeBNTcZV).
 
 YITH Pre-Order for WooCommerce is 100% WPML Compatible
-
-= Premium Live Demo =
-
-Do you want to discover all plugin features? Would you like to try them?
-
-Use our [test sandbox](http://plugins.yithemes.com/yith-woocommerce-pre-order/ "Pre-Order sandbox"). By accessing our testing platform, you will be able to discover all plugin features and test the plugin as your prefer, both in back end and in front end.
-
-What are you waiting for? Try the official "[live demo](http://plugins.yithemes.com/yith-woocommerce-pre-order/ "Pre-Order sandbox")" of the plugin right now and click on the "LAUNCH ADMIN DEMO" link that you find in the topbar.
 
 = Documentation =
 
@@ -100,17 +108,24 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 
 == Screenshots ==
 
-1. Set a product as Pre-Order.
-2. Plugin General options.
-3. Plugin Style options.
-4. Pre-order in Single product page.
-5. Pre-order products with availability date in Shop page.
-6. "Pre-order confirmed" email for the customer.
-7. My Account "Orders" page showing the pre-order info, including the availability date.
-8. My pre-orders page.
+1. General options.
+2. Customization options.
+3. Pre-order options on edit product page.
+4. Product on pre-order and discount.
+5. Shop page.
+6. Pre-orders in My Account.
+7. Pre-order details with availability date.
+8. Pre-order confirmation email.
 
 
 == Changelog ==
+= 3.0.0 - Released on 21 October 2024 =
+
+* New: support for WooCommerce 9.3
+* New: Plugin panel restyling
+* Update: YITH plugin framework
+* Tweak: Improved backend performance
+
 = 2.27.0 - Released on 22 August 2024 =
 
 * New: support for WooCommerce 9.2

@@ -125,54 +125,24 @@ if ( ! class_exists( 'YITH_Pre_Order_Admin' ) ) {
 				return;
 			}
 
-			$menu_title = 'Pre-Order';
-
-			$admin_tabs = apply_filters(
-				'yith_wcpo_admin_tabs',
-				array(
-					'general' => __( 'General options', 'yith-pre-order-for-woocommerce' ),
-					'style'   => __( 'Style', 'yith-pre-order-for-woocommerce' ),
-				)
-			);
-
-			$premium_tab = array(
-				'landing_page_url' => $this->get_premium_landing_uri(),
-				'premium_features' => array(
-					// Translators: %1$s '<b>', %2$s '</b>'.
-					sprintf( __( 'Automatically enable pre-order mode in %1$s out of stock products %2$s', 'yith-pre-order-for-woocommerce' ), '<b>', '</b>' ),
-					// Translators: %1$s '<b>', %2$s '</b>'.
-					sprintf( __( 'Ask users to %1$s pay a fee %2$s for each pre-order', 'yith-pre-order-for-woocommerce' ), '<b>', '</b>' ),
-					__( 'Schedule the pre-order mode in specific products', 'yith-pre-order-for-woocommerce' ),
-					// Translators: %1$s '<b>', %2$s '</b>'.
-					sprintf( __( 'Set a %1$s dynamic availability date: %2$s the product becomes available X days after the pre-order', 'yith-pre-order-for-woocommerce' ), '<b>', '</b>' ),
-					__( 'Manually charge pre-orders upon release, through the “Pay Later” option', 'yith-pre-order-for-woocommerce' ),
-					// Translators: %1$s '<b>', %2$s '</b>'.
-					sprintf( __( '%1$s Automatically charge customer\'s credit card %2$s upon pre-orders release (a supported payment gateway is required)', 'yith-pre-order-for-woocommerce' ), '<b>', '</b>' ),
-					// Translators: %1$s '<b>', %2$s '</b>'.
-					sprintf( __( 'Set the %1$s maximum quantity %2$s that can be ordered by the user per each pre-order product', 'yith-pre-order-for-woocommerce' ), '<b>', '</b>' ),
-					__( 'Offer free shipping for pre-order products ', 'yith-pre-order-for-woocommerce' ),
-					'<b>' . __( 'Regular updates, translations and premium support', 'yith-pre-order-for-woocommerce' ) . '</b>',
-				),
-				'main_image_url'   => YITH_WCPO_ASSETS_URL . 'images/get-premium-preorder.jpg',
-			);
-
 			$args = array(
 				'create_menu_page' => true,
 				'parent_slug'      => '',
 				'plugin_slug'      => YITH_WCPO_SLUG,
-				'premium_tab'      => $premium_tab,
+				'premium_tab'      => $this->get_premium_tab(),
 				'page_title'       => 'YITH Pre-Order for WooCommerce',
-				'menu_title'       => $menu_title,
+				'menu_title'       => 'Pre-Order',
 				'capability'       => 'manage_options',
 				'parent'           => '',
 				'parent_page'      => 'yith_plugin_panel',
 				'page'             => $this->panel_page,
-				'admin-tabs'       => $admin_tabs,
+				'admin-tabs'       => $this->get_panel_tabs(),
 				'class'            => yith_set_wrapper_class(),
 				'options-path'     => YITH_WCPO_OPTIONS_PATH,
 				'is_free'          => defined( 'YITH_WCPO_FREE_INIT' ),
 				'is_premium'       => defined( 'YITH_WCPO_PREMIUM' ),
 				'is_extended'      => false,
+				'ui_version'       => 2,
 			);
 
 			/* === Fixed: not updated theme/old plugin framework  === */
@@ -181,6 +151,80 @@ if ( ! class_exists( 'YITH_Pre_Order_Admin' ) ) {
 			}
 
 			$this->panel = new YIT_Plugin_Panel_WooCommerce( $args );
+		}
+
+		/**
+		 * Get an array of panel tabs
+		 *
+		 * @since  3.0.0
+		 * @return array
+		 */
+		public function get_panel_tabs() {
+			return apply_filters(
+				'yith_wcpo_free_admin_tabs',
+				array(
+					'general'       => array(
+						'title'       => __( 'General Options', 'yith-pre-order-for-woocommerce' ),
+						'description' => __( 'Set the general behavior of the plugin.', 'yith-pre-order-for-woocommerce' ),
+						'icon'        => 'settings',
+					),
+					'customization'         => array(
+						'title'       => __( 'Customization', 'yith-pre-order-for-woocommerce' ),
+						'description' => __( 'Set custom labels to customize the pre-order options.', 'yith-pre-order-for-woocommerce' ),
+						'icon'        => '<svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M15 11.25l1.5 1.5.75-.75V8.758l2.276-.61a3 3 0 10-3.675-3.675l-.61 2.277H12l-.75.75 1.5 1.5M15 11.25l-8.47 8.47c-.34.34-.8.53-1.28.53s-.94.19-1.28.53l-.97.97-.75-.75.97-.97c.34-.34.53-.8.53-1.28s.19-.94.53-1.28L12.75 9M15 11.25L12.75 9"></path></svg>',
+					)
+				)
+			);
+		}
+
+		/**
+		 * Get an array of panel tabs
+		 *
+		 * @since  3.0.0
+		 * @return array
+		 */
+		public function get_premium_tab() {
+			return apply_filters(
+				'yith_wcpo_premium_tab',
+				array(
+					'landing_page_url' => $this->get_premium_landing_uri(),
+					'features' => array(
+						array(
+							'title'       => __( 'Enable pre-order mode on out-of-stock products automatically', 'yith-pre-order-for-woocommerce' ),
+							'description' => __( 'By automatically enabling pre-order mode for out-of-stock products, your customers can order products that are temporarily unavailable or out of stock. This way, you can avoid losing orders while also getting cash flow up front.', 'yith-pre-order-for-woocommerce' ),
+						),
+						array(
+							'title'       => __( 'Allow pre-orders only for specific users or user roles', 'yith-pre-order-for-woocommerce' ),
+							'description' => __( 'In the premium version, you can decide whether only specific customers or specific user roles can pre-order the products you sell.', 'yith-pre-order-for-woocommerce' ),
+						),
+						array(
+							'title'       => __( 'Charge a "fee" to customers who pre-order your products', 'yith-pre-order-for-woocommerce' ),
+							'description' => __( 'You can charge an additional fee for pre-ordered products by configuring a global cost for all products, and you can even override the cost for specific products.', 'yith-pre-order-for-woocommerce' ),
+						),
+						array(
+							'title'       => __( 'Offer a pre-order discount', 'yith-pre-order-for-woocommerce' ),
+							'description' => __( 'Apply a fixed or percentage discount off the product price for all users who order before the product is available in the shop. Offering products at a special price is a powerful strategy to leverage the principle of urgency and encourage customers to order.', 'yith-pre-order-for-woocommerce' ),
+						),
+						array(
+							'title'       => __( 'Enable the "Pay Later" option to prompt customers to manually pay when the product is available', 'yith-pre-order-for-woocommerce' ),
+							'description' => __( 'Enable the "Pay Later" method at checkout so that customers receive an email notification when the product is available in your store, prompting them to pay for the order.', 'yith-pre-order-for-woocommerce' ),
+						),
+						array(
+							'title'       => __( 'Charge your customers\' credit card automatically when the product is available in your shop ', 'yith-pre-order-for-woocommerce' ),
+							'description' => __( 'By using the plugin together with YITH Stripe, YITH Stripe Connect, or YITH Braintree, you can request customers to enter their credit card details so that you can automatically charge them only when the product is available. This solution will reduce the number of unpaid pre-orders and make them easier to manage.', 'yith-pre-order-for-woocommerce' ),
+						),
+						array(
+							'title'       => __( 'Offer free shipping on pre-order product purchases', 'yith-pre-order-for-woocommerce' ),
+							'description' => __( 'Do you want to add an incentive to push customers to pre-order products? Well, with just one click, you can offer free shipping on all orders that include a pre-order product.', 'yith-pre-order-for-woocommerce' ),
+						),
+						array(
+							'title'       => __( 'Manage advanced admin and customer notifications', 'yith-pre-order-for-woocommerce' ),
+							'description' => __( 'Send automated emails to customers to confirm their pre-orders and keep them updated on the status and availability date. The plugin also includes several notifications for the admin to easily manage pre-orders and products.', 'yith-pre-order-for-woocommerce' ),
+						),
+					),
+					'main_image_url'   => YITH_WCPO_ASSETS_URL . 'images/get-premium-preorder.jpg',
+				)
+			);
 		}
 
 		/**
