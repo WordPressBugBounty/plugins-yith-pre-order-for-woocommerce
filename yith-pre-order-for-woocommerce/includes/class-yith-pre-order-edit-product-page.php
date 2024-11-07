@@ -317,20 +317,6 @@ if ( ! class_exists( 'YITH_Pre_Order_Edit_Product_Page' ) ) {
 					$meta->display_key   = __( 'Pre-order item', 'yith-pre-order-for-woocommerce' );
 					$meta->display_value = __( 'Yes', 'yith-pre-order-for-woocommerce' );
 				}
-				if ( '_ywpo_item_status' === $meta->key ) {
-					$meta->display_key = __( 'Pre-order status', 'yith-pre-order-for-woocommerce' );
-					switch ( $meta->value ) {
-						case 'waiting':
-							$meta->display_value = __( 'Waiting', 'yith-pre-order-for-woocommerce' );
-							break;
-						case 'completed':
-							$meta->display_value = __( 'Completed', 'yith-pre-order-for-woocommerce' );
-							break;
-						case 'cancelled':
-							$meta->display_value = __( 'Cancelled', 'yith-pre-order-for-woocommerce' );
-							break;
-					}
-				}
 				if ( '_ywpo_item_for_sale_date' === $meta->key ) {
 					$meta->display_key   = __( 'Availability date', 'yith-pre-order-for-woocommerce' );
 					$meta->display_value = '<p>' . ywpo_print_datetime( $meta->value ) . '</p>';
@@ -349,6 +335,7 @@ if ( ! class_exists( 'YITH_Pre_Order_Edit_Product_Page' ) ) {
 		 */
 		public function hidden_order_item_meta( $metas ) {
 			$metas[] = '_ywpo_new_pre_order_email_sent';
+			$metas[] = '_ywpo_item_status';
 			return $metas;
 		}
 	}

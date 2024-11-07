@@ -52,7 +52,7 @@ if ( ! class_exists( 'YITH_Pre_Order_Confirmed_Email' ) ) {
 			$this->subject    = __( 'Your pre-order placed on {site_title} is confirmed', 'yith-pre-order-for-woocommerce' );
 			$this->email_body = __(
 				"Hi {customer_name},\n\nYour pre-order has been received and is now being processed:\n{order_link}\n{product_table}
-\nThe expected availability/release date is <strong>{release_date}</strong>
+We will send you another email when the product becomes available in our shop.\nThe expected availability/release date is <strong>{release_date}</strong>
 \nRegards,\n{site_title}",
 				'yith-pre-order-for-woocommerce'
 			);
@@ -108,7 +108,8 @@ if ( ! class_exists( 'YITH_Pre_Order_Confirmed_Email' ) ) {
 				$item_id
 			);
 
-			$release_date        = $order->get_item( $item_id )->get_meta( '_ywpo_item_for_sale_date' );
+			$item                = $order->get_item( $item_id );
+			$release_date        = $item->get_meta( '_ywpo_item_for_sale_date' );
 			$no_release_date_msg = apply_filters( 'ywpo_confirmed_email_no_release_date', __( 'at a future date', 'yith-pre-order-for-woocommerce' ), $order, $product, $item_id );
 
 			$this->placeholders['{customer_name}']    = $order->get_formatted_billing_full_name();
@@ -127,7 +128,11 @@ if ( ! class_exists( 'YITH_Pre_Order_Confirmed_Email' ) ) {
 			$this->email_body = $this->format_string( $this->get_option( 'email_body', $this->email_body ) );
 
 			if ( $this->is_enabled() && $this->get_recipient() ) {
-				$this->send( $this->get_recipient(), $this->get_subject(), $this->get_content(), $this->get_headers(), $this->get_attachments() );
+				$result = $this->send( $this->get_recipient(), $this->get_subject(), $this->get_content(), $this->get_headers(), $this->get_attachments() );
+				if ( $result ) {
+					$item->update_meta_data( '_ywpo_new_pre_order_email_sent', 'yes' );
+					$item->save();
+				}
 			}
 		}
 

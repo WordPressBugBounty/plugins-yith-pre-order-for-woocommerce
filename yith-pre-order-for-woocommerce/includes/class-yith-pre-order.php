@@ -101,6 +101,7 @@ if ( ! class_exists( 'YITH_Pre_Order' ) ) {
 
 			add_filter( 'woocommerce_email_classes', array( $this, 'register_email_classes' ) );
 			add_filter( 'woocommerce_order_data_store_cpt_get_orders_query', array( $this, 'orders_custom_query_var' ), 10, 2 );
+            add_action( 'init', array( $this, 'manage_new_pre_order_email_hooks' ) );
 		}
 
 		/**
@@ -223,6 +224,51 @@ if ( ! class_exists( 'YITH_Pre_Order' ) ) {
 
 			return $query;
 		}
+
+        /**
+         * Include the transactional email hooks for the 'Pre-order confirmed' and 'New pre-order' email notifications.
+         */
+        public function manage_new_pre_order_email_hooks() {
+            add_action( 'woocommerce_order_status_pending_to_on-hold_notification', array( $this, 'new_pre_order_email_trigger' ), 10, 2 );
+            add_action( 'woocommerce_order_status_failed_to_on-hold_notification', array( $this, 'new_pre_order_email_trigger' ), 10, 2 );
+            add_action( 'woocommerce_order_status_cancelled_to_on-hold_notification', array( $this, 'new_pre_order_email_trigger' ), 10, 2 );
+            add_action( 'woocommerce_order_status_pending_to_processing_notification', array( $this, 'new_pre_order_email_trigger' ), 10, 2 );
+            add_action( 'woocommerce_order_status_failed_to_processing_notification', array( $this, 'new_pre_order_email_trigger' ), 10, 2 );
+            add_action( 'woocommerce_order_status_cancelled_to_processing_notification', array( $this, 'new_pre_order_email_trigger' ), 10, 2 );
+            add_action( 'woocommerce_order_status_on-hold_to_processing_notification', array( $this, 'new_pre_order_email_trigger' ), 10, 2 );
+            add_action( 'woocommerce_order_status_completed_notification', array( $this, 'new_pre_order_email_trigger' ), 10, 2 );
+        }
+
+        /**
+         * Send the 'Pre-order confirmed' and 'New pre-order' email notifications.
+         *
+         * @param int|string $order_id The WC Order ID.
+         * @param WC_Order   $order    The WC Order object.
+         */
+        public function new_pre_order_email_trigger( $order_id, $order ) {
+            global $sitepress;
+            if ( ! $order instanceof WC_Order || 'yes' !== $order->get_meta( '_order_has_preorder' ) ) {
+                return;
+            }
+            $items = $order->get_items();
+            // Send the email notification.
+            WC()->mailer();
+            foreach ( $items as $item ) {
+                if ( 'line_item' !== $item->get_type() || 'yes' === $item->get_meta( '_ywpo_new_pre_order_email_sent' ) ) {
+                    return;
+                }
+                $id      = $item->get_variation_id() ? $item->get_variation_id() : $item->get_product_id();
+                $product = $sitepress ? wc_get_product( yit_wpml_object_id( $id, 'product', true, $sitepress->get_default_language() ) ) : wc_get_product( $id );
+
+                $item_preorder = $item->get_meta( '_ywpo_item_preorder' );
+                $item_status   = $item->get_meta( '_ywpo_item_status' );
+
+                if ( 'yes' === $item_preorder && 'waiting' === $item_status ) {
+                    do_action( 'ywpo_confirmed_email', $order, $product, $item->get_id() );
+                    do_action( 'ywpo_new_pre_order_email', $order, $product, $item->get_id() );
+                }
+            }
+        }
 
 		/**
 		 * Check if a product has the pre-order status

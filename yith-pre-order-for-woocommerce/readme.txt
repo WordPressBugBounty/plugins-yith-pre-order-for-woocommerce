@@ -1,13 +1,17 @@
 === YITH Pre-Order for WooCommerce ===
 
 Contributors: yithemes
-Tags: pre order, pre-order, preorder, pre-arrange, woocommerce, for woocommerce, e-commerce, shop, yith, yithemes
-Requires at least: 6.4
-Tested up to: 6.6
-Stable tag: 3.0.0
+Tags: yith, pre-order, preorder, pre order, woocommerce
+Requires at least: 6.5
+Tested up to: 6.7
+Stable tag: 3.1.0
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
+
+Let your customers buy products before they are released and generate cash flow in advance to cover costs.
+
+== Description ==
 
 With YITH Pre-Order for WooCommerce you can enable a pre-sales system in your shop, increase your customers' interest in soon-to-be-released products and get cash flow in advance to cover the costs of production/promotion.
 
@@ -15,7 +19,7 @@ With YITH Pre-Order for WooCommerce you can enable a pre-sales system in your sh
 
 With this free plugin, you can easily manage the pre-sale of your products and create a marketing strategy similar to that used by large e-commerce stores such as Amazon, Apple, Nike, and Nintendo. You’ll be able to change the "Add to cart" button label to "Pre-order", set a release date for your products, and send an email notification to your customers when the products they pre-ordered become available in your store.
 
-Do you want to offer an incentive to push customers to pre-order products? The winning strategy is to offer a special discount on the price of your products only to those who pre-order them (e.g. "Get $50 off only if you pre-order the new smartphone now!").
+**Do you want to offer an incentive to push customers to pre-order products?** The winning strategy is to offer a special discount on the price of your products only to those who pre-order them (e.g. "Get $50 off only if you pre-order the new smartphone now!").
 
 = Free version options =
 
@@ -34,7 +38,7 @@ Want to see the plugin in action? Check out the [live demo >](https://plugins.yi
 = Need more options? Go for the premium version! =
 
 With the premium version, you can unlock advanced features and build an even more effective pre-sale strategy in your shop.
-With the premium version, you can:
+**With the premium version, you can:**
 
 * Enable pre-order mode automatically on all unavailable/out-of-stock products
 * Hide pre-order prices from unregistered users
@@ -49,25 +53,6 @@ With the premium version, you can:
 ... and more!
 
 Try out the premium version [live demo >](https://plugins.yithemes.com/yith-woocommerce-pre-order/)
-
-= Languages =
-
-Available languages:
-
-* English
-* Italian
-* Spanish
-
-= WPML =
-
-Take advantage of [WPML](https://wpml.org/?aid=24889&affiliate_key=Qn1wDeBNTcZV) compatibility. Feel free to translate your plugin easily using the most popular and powerful tool for multi-language sites, [WPML](https://wpml.org/?aid=24889&affiliate_key=Qn1wDeBNTcZV).
-
-YITH Pre-Order for WooCommerce is 100% WPML Compatible
-
-= Documentation =
-
-Please, read the [official documentation of YITH Pre-Order for WooCommerce](http://yithemes.com/docs-plugins/yith-woocommerce-pre-order/ "Official Pre-Order documentation") to learn more about all plugin features.
-
 
 == Installation ==
 
@@ -119,6 +104,13 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 
 
 == Changelog ==
+= 3.1.0 - Released on 7 November 2024 =
+
+* New: support for WordPress 6.7
+* New: support for WooCommerce 9.4
+* Update: YITH plugin framework
+* Fix: pre-order confirmed and new pre-order emails were not being sent
+
 = 3.0.0 - Released on 21 October 2024 =
 
 * New: support for WooCommerce 9.3
@@ -544,14 +536,3 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 = 1.0.0 - Released on 28 November 2016 =
 
 * First release
-
-
-== Suggestions ==
-
-If you have any suggestions about how to improve YITH Pre-Order for WooCommerce, you can [write us](mailto:plugins@yithemes.com "Your Inspiration Themes")
-so we can bundle them into the next plugin release.
-
-== Translators ==
-
-If you can't find this plugin in your language and want to translate it, use the dedicated tool at [Translating WordPress](https://translate.wordpress.org/locale/it/default/wp-plugins/yith-pre-order-for-woocommerce "Translating WordPress").
-Or, if you have created your own language pack, or have an update for an existing one, you can send it as an email attachment from our [Contacts page](http://yithemes.com/contact/ "Your Inspiration Themes") and we will bundle into YITH Pre-Order for WooCommerce.

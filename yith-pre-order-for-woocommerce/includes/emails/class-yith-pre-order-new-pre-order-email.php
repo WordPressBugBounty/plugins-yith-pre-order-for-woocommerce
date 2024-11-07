@@ -110,7 +110,8 @@ if ( ! class_exists( 'YITH_Pre_Order_New_Pre_Order_Email' ) ) {
 				$item_id
 			);
 
-			$release_date        = $order->get_item( $item_id )->get_meta( '_ywpo_item_for_sale_date' );
+			$item                = $order->get_item( $item_id );
+			$release_date        = $item->get_meta( '_ywpo_item_for_sale_date' );
 			$no_release_date_msg = apply_filters( 'ywpo_new_pre_order_email_no_release_date', __( 'at a future date', 'yith-pre-order-for-woocommerce' ), $order, $product, $item_id );
 
 			$this->placeholders['{customer_name}']    = $order->get_formatted_billing_full_name();
@@ -126,7 +127,11 @@ if ( ! class_exists( 'YITH_Pre_Order_New_Pre_Order_Email' ) ) {
 			$this->email_body = $this->format_string( $this->get_option( 'email_body', $this->email_body ) );
 
 			if ( $this->is_enabled() && $this->get_recipient() ) {
-				$this->send( $this->get_recipient(), $this->get_subject(), $this->get_content(), $this->get_headers(), $this->get_attachments() );
+				$result = $this->send( $this->get_recipient(), $this->get_subject(), $this->get_content(), $this->get_headers(), $this->get_attachments() );
+				if ( $result ) {
+					$item->update_meta_data( '_ywpo_new_pre_order_email_sent', 'yes' );
+					$item->save();
+				}
 			}
 		}
 
