@@ -3,13 +3,13 @@
  * Plugin Name: YITH Pre-Order for WooCommerce
  * Plugin URI: https://yithemes.com/themes/plugins/yith-woocommerce-pre-order
  * Description: Thanks to <code><strong>YITH Pre-Order for WooCommerce</strong></code> you can improve right away the sales of unavailable items, offering your customers the chance to purchase the products and receive them only after they are officially on sale. <a href="https://yithemes.com/" target="_blank">Get more plugins for your e-commerce on <strong>YITH</strong></a>.
- * Version: 3.1.0
+ * Version: 3.2.0
  * Author: YITH
  * Author URI: https://yithemes.com/
  * Text Domain: yith-pre-order-for-woocommerce
  * Domain Path: /languages/
- * WC requires at least: 9.2
- * WC tested up to: 9.4
+ * WC requires at least: 9.3
+ * WC tested up to: 9.5
  *
  * @package YITH\PreOrder
  */
@@ -27,7 +27,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 
 /* === DEFINE === */
-! defined( 'YITH_WCPO_VERSION' ) && define( 'YITH_WCPO_VERSION', '3.1.0' );
+! defined( 'YITH_WCPO_VERSION' ) && define( 'YITH_WCPO_VERSION', '3.2.0' );
 ! defined( 'YITH_WCPO_FREE_INIT' ) && define( 'YITH_WCPO_FREE_INIT', plugin_basename( __FILE__ ) );
 ! defined( 'YITH_WCPO_SLUG' ) && define( 'YITH_WCPO_SLUG', 'yith-pre-order-for-woocommerce' );
 ! defined( 'YITH_WCPO_FILE' ) && define( 'YITH_WCPO_FILE', __FILE__ );
@@ -39,11 +39,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 ! defined( 'YITH_WCPO_WC_TEMPLATE_PATH' ) && define( 'YITH_WCPO_WC_TEMPLATE_PATH', YITH_WCPO_PATH . 'templates/woocommerce/' );
 ! defined( 'YITH_WCPO_OPTIONS_PATH' ) && define( 'YITH_WCPO_OPTIONS_PATH', YITH_WCPO_PATH . 'plugin-options' );
 
-/* Plugin Framework Version Check */
-if ( ! function_exists( 'yit_maybe_plugin_fw_loader' ) && file_exists( YITH_WCPO_PATH . 'plugin-fw/init.php' ) ) {
-	require_once YITH_WCPO_PATH . 'plugin-fw/init.php';
+// Plugin Framework Loader.
+if ( file_exists( plugin_dir_path( __FILE__ ) . 'plugin-fw/init.php' ) ) {
+    require_once plugin_dir_path( __FILE__ ) . 'plugin-fw/init.php';
 }
-yit_maybe_plugin_fw_loader( YITH_WCPO_PATH );
 
 register_deactivation_hook( YITH_WCPO_FILE, 'ywpo_rewrite_rules' );
 
@@ -120,7 +119,9 @@ if ( ! function_exists( 'yith_ywpo_init' ) ) {
 		/**
 		 * Load text domain
 		 */
-		load_plugin_textdomain( 'yith-pre-order-for-woocommerce', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
+        if ( function_exists( 'yith_plugin_fw_load_plugin_textdomain' ) ) {
+            yith_plugin_fw_load_plugin_textdomain( 'yith-pre-order-for-woocommerce', basename( dirname( __FILE__ ) ) . '/languages' );
+        }
 		require_once YITH_WCPO_PATH . 'includes/class-yith-pre-order.php';
 		return YITH_Pre_Order();
 	}

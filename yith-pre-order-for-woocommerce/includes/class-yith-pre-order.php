@@ -94,8 +94,6 @@ if ( ! class_exists( 'YITH_Pre_Order' ) ) {
 			$this->init_includes();
 			$this->init();
 
-			add_action( 'plugins_loaded', array( $this, 'plugin_fw_loader' ), 15 );
-
 			add_action( 'init', array( $this, 'add_endpoints' ), 1 );
 			add_action( 'init', array( $this, 'rewrite_rules' ), 22 );
 
@@ -155,22 +153,6 @@ if ( ! class_exists( 'YITH_Pre_Order' ) ) {
 		 */
 		public function add_endpoints() {
 			add_rewrite_endpoint( 'my-pre-orders', EP_ROOT | EP_PAGES );
-		}
-
-		/**
-		 * Load plugin framework
-		 *
-		 * @since  1.0
-		 * @return void
-		 */
-		public function plugin_fw_loader() {
-			if ( ! defined( 'YIT_CORE_PLUGIN' ) ) {
-				global $plugin_fw_data;
-				if ( ! empty( $plugin_fw_data ) ) {
-					$plugin_fw_file = array_shift( $plugin_fw_data );
-					require_once $plugin_fw_file;
-				}
-			}
 		}
 
 		/**
