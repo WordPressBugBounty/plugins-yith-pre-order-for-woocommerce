@@ -4,7 +4,7 @@ Contributors: yithemes
 Tags: yith, pre-order, preorder, pre order, woocommerce
 Requires at least: 6.6
 Tested up to: 6.8
-Stable tag: 3.6.0
+Stable tag: 3.7.0
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -104,6 +104,10 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 
 
 == Changelog ==
+= 3.7.0 - Released on 17 June 2025 =
+
+* New: support for WooCommerce 9.9
+
 = 3.6.0 - Released on 15 April 2025 =
 
 * New: support for WordPress 6.8

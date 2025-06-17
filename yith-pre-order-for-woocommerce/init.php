@@ -3,13 +3,13 @@
  * Plugin Name: YITH Pre-Order for WooCommerce
  * Plugin URI: https://yithemes.com/themes/plugins/yith-woocommerce-pre-order
  * Description: Thanks to <code><strong>YITH Pre-Order for WooCommerce</strong></code> you can improve right away the sales of unavailable items, offering your customers the chance to purchase the products and receive them only after they are officially on sale. <a href="https://yithemes.com/" target="_blank">Get more plugins for your e-commerce on <strong>YITH</strong></a>.
- * Version: 3.6.0
+ * Version: 3.7.0
  * Author: YITH
  * Author URI: https://yithemes.com/
  * Text Domain: yith-pre-order-for-woocommerce
  * Domain Path: /languages/
- * WC requires at least: 9.6
- * WC tested up to: 9.8
+ * WC requires at least: 9.7
+ * WC tested up to: 9.9
  * Requires Plugins: woocommerce
  *
  * @package YITH\PreOrder
@@ -28,7 +28,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 
 /* === DEFINE === */
-! defined( 'YITH_WCPO_VERSION' ) && define( 'YITH_WCPO_VERSION', '3.6.0' );
+! defined( 'YITH_WCPO_VERSION' ) && define( 'YITH_WCPO_VERSION', '3.7.0' );
 ! defined( 'YITH_WCPO_FREE_INIT' ) && define( 'YITH_WCPO_FREE_INIT', plugin_basename( __FILE__ ) );
 ! defined( 'YITH_WCPO_SLUG' ) && define( 'YITH_WCPO_SLUG', 'yith-pre-order-for-woocommerce' );
 ! defined( 'YITH_WCPO_FILE' ) && define( 'YITH_WCPO_FILE', __FILE__ );
