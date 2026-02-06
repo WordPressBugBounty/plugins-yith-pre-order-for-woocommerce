@@ -105,14 +105,14 @@ if ( ! class_exists( 'YITH_Pre_Order_My_Account' ) ) {
 
 				$release_date_label = apply_filters(
 					'ywpo_order_item_release_date_label',
-					__( 'Availability date: ', 'yith-pre-order-for-woocommerce' ),
+					__( 'Availability date:', 'yith-pre-order-for-woocommerce' ),
 					$item,
 					$order
 				);
 
 				$release_date_label_output = apply_filters(
 					'ywpo_order_item_release_date_label_output',
-					'<div class="ywpo_release_date">' . $release_date_label . '</div>',
+					'<div class="ywpo_release_date">' . $release_date_label . ' </div>',
 					$item,
 					$order
 				);

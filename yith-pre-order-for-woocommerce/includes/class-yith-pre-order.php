@@ -175,6 +175,7 @@ if ( ! class_exists( 'YITH_Pre_Order' ) ) {
 		 * @return array
 		 */
 		public function register_email_classes( $email_classes ) {
+			require_once YITH_WCPO_PATH . 'includes/emails/class-yith-pre-order-email.php';
 			$email_classes['YITH_Pre_Order_Confirmed_Email']     = include YITH_WCPO_PATH . 'includes/emails/class-yith-pre-order-confirmed-email.php';
 			$email_classes['YITH_Pre_Order_New_Pre_Order_Email'] = include YITH_WCPO_PATH . 'includes/emails/class-yith-pre-order-new-pre-order-email.php';
 

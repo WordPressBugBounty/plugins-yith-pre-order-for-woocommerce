@@ -20,7 +20,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 do_action( 'woocommerce_email_header', $email_heading, $email );
 
 $body     = ! empty( $email->email_body ) ? $email->email_body : '';
-$_product = wc_get_product( $email->data['product'] );
+$_product = $email->data['product'];
 $_order   = $email->data['order'];
 $item_id  = $email->data['item_id'];
 

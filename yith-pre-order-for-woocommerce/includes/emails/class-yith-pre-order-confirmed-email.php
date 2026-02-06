@@ -19,21 +19,7 @@ if ( ! class_exists( 'YITH_Pre_Order_Confirmed_Email' ) ) {
 	/**
 	 * Class YITH_Pre_Order_Confirmed_Email
 	 */
-	class YITH_Pre_Order_Confirmed_Email extends WC_Email {
-
-		/**
-		 * Email content.
-		 *
-		 * @var string $email_body
-		 */
-		public $email_body;
-
-		/**
-		 * Email additional data.
-		 *
-		 * @var array $data
-		 */
-		public $data;
+	class YITH_Pre_Order_Confirmed_Email extends YITH_Pre_Order_Email {
 
 		/**
 		 * Constructor.
@@ -102,7 +88,7 @@ We will send you another email when the product becomes available in our shop.\n
 
 			$order_link = apply_filters(
 				'ywpo_confirmed_email_order_link',
-				'<a href="' . $order->get_view_order_url() . '">' . _x( 'Order', 'WooCommerce shop order', 'yith-pre-order-for-woocommerce' ) . ' #' . $order->get_id() . '</a>',
+				'<a href="' . $order->get_edit_order_url() . '">#' . $order->get_order_number() . '</a>',
 				$order,
 				$product,
 				$item_id
@@ -140,8 +126,12 @@ We will send you another email when the product becomes available in our shop.\n
 		 * Get content html.
 		 *
 		 * @return string
+		 * @throws WC_Data_Exception Exception.
 		 */
 		public function get_content_html() {
+			if ( has_filter( 'woocommerce_is_email_preview' ) ) {
+				$this->data = $this->get_dummy_data();
+			}
 			return wc_get_template_html(
 				$this->template_html,
 				array(
@@ -154,7 +144,6 @@ We will send you another email when the product becomes available in our shop.\n
 				YITH_WCPO_TEMPLATE_PATH
 			);
 		}
-
 
 		/**
 		 * Initialise Settings Form Fields - these are generic email options most will use.

@@ -39,6 +39,13 @@ if ( $item instanceof WC_Order_Item_Product && in_array( $context, array( 'pre-o
 	$price = (float) $item->get_total() + (float) $item->get_total_tax();
 }
 
+$release_date_label = apply_filters(
+	'ywpo_order_item_release_date_label',
+	esc_html__( 'Availability date:', 'yith-pre-order-for-woocommerce' ),
+	$item,
+	$_order
+);
+
 ?>
 	<table style="background-color: #f6f6f6;">
 		<tr>
@@ -53,7 +60,7 @@ if ( $item instanceof WC_Order_Item_Product && in_array( $context, array( 'pre-o
 				<div style="margin-bottom: 10px; text-transform: uppercase; color: #bc501c; font-size: 10px;">
 					<?php if ( ! empty( $item_release_date ) && $show_release_date ) : ?>
 						<div>
-							<strong><?php echo esc_html__( 'Availability date:', 'yith-pre-order-for-woocommerce' ); ?></strong>
+							<strong><?php echo $release_date_label; ?></strong>
 							<span><?php echo '&nbsp;' . esc_html( apply_filters( 'ywpo_email_item_release_date_output', ywpo_print_date( $item_release_date ), $_product, $item_id, $item_release_date ) ); ?></span>
 						</div>
 					<?php endif; ?>

@@ -28,6 +28,13 @@ if ( ! class_exists( 'YITH_Pre_Order_Frontend' ) ) {
 		 */
 		public $pre_orders;
 
+        /**
+         * This array will contain all pre-order products that has been rendered in WC Blocks to avoid duplication in classic hooks.
+         *
+         * @var array
+         */
+        public $po_rendered_in_blocks;
+
 		/**
 		 * Compatibility for themes which returns only 2 parameters of "woocommerce_stock_html" filter.
 		 *
@@ -220,17 +227,21 @@ if ( ! class_exists( 'YITH_Pre_Order_Frontend' ) ) {
 		 * Print the pre-order info (start date or availability date) in loop pages.
 		 */
 		public function print_pre_order_info_on_loop() {
-			global $product, $sitepress;
+			global $product;
 
 			if ( apply_filters( 'ywpo_availability_in_shop', 'yes' !== get_option( 'ywpo_availability_in_shop', 'yes' ) ) ) {
 				return;
 			}
 
+            if ( isset( $this->po_rendered_in_blocks[ $product->get_id() ] ) ) {
+                return;
+            }
+
 			if ( YITH_Pre_Order_Utils::is_pre_order_active( $product ) ) {
 				$pre_order_info = apply_filters( 'ywpo_pre_order_info_on_loop', YITH_Pre_Order_Frontend()::print_pre_order_info( $product, 'pre_order_loop' ), $product->get_id() );
 				echo wp_kses_post( $pre_order_info );
+                $this->po_rendered_in_blocks[ $product->get_id() ] = $product->get_id();
 			}
-
 		}
 
 		/**
@@ -579,7 +590,7 @@ if ( ! class_exists( 'YITH_Pre_Order_Frontend' ) ) {
 				$availability_label = str_replace( '{availability_time}', '<span class="availability_time">' . $time . '</span>', $availability_label );
 				$availability_label = apply_filters( 'yith_ywpo_availability_date_no_auto_label', nl2br( $availability_label ), $product->get_id(), $timestamp, $date, $time );
 
-				return '<div class="ywpo_availability_date ' . $context . '-no-auto-format" style="margin-bottom: 20px;">' . $availability_label . '</div>';
+				return '<div class="ywpo_availability_date ' . $context . '-no-auto-format">' . $availability_label . '</div>';
 
 			}
 

@@ -1,14 +1,14 @@
-# Copyright (C) 2025 YITH
+# Copyright (C) 2026 YITH
 # This file is distributed under the same license as the YITH Pre-Order for WooCommerce package.
 msgid ""
 msgstr ""
-"Project-Id-Version: YITH Pre-Order for WooCommerce 3.10.0\n"
+"Project-Id-Version: YITH Pre-Order for WooCommerce 3.13.0\n"
 "Report-Msgid-Bugs-To: YITH <plugins@yithemes.com>\n"
-"POT-Creation-Date: 2025-09-11 16:07:58+00:00\n"
+"POT-Creation-Date: 2026-01-22 14:56:02+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2025-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2026-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: YITH <info@yithemes.com>\n"
 "Language: en\n"
@@ -154,24 +154,24 @@ msgstr ""
 msgid "Availability date"
 msgstr ""
 
-#: includes/class-yith-pre-order-frontend.php:147
-#: includes/class-yith-pre-order-frontend.php:180
-#: includes/class-yith-pre-order-frontend.php:184
+#: includes/class-yith-pre-order-frontend.php:154
+#: includes/class-yith-pre-order-frontend.php:187
+#: includes/class-yith-pre-order-frontend.php:191
 #: plugin-options/customization-options.php:51
 msgid "Pre-order now"
 msgstr ""
 
-#: includes/class-yith-pre-order-frontend.php:164
+#: includes/class-yith-pre-order-frontend.php:171
 #: includes/class-yith-pre-order-my-account.php:88
 msgid "Pre-order product"
 msgstr ""
 
-#: includes/class-yith-pre-order-frontend.php:276
+#: includes/class-yith-pre-order-frontend.php:287
 #. translators: %s: item name.
 msgid "Item %s was pre-ordered"
 msgstr ""
 
-#: includes/class-yith-pre-order-frontend.php:566
+#: includes/class-yith-pre-order-frontend.php:577
 #: plugin-options/customization-options.php:65
 #. translators: %1$s: date, %2$s: time.
 #. translators: placeholders %1$s: date %2$s: time
@@ -183,7 +183,8 @@ msgid "Includes pre-order item(s)"
 msgstr ""
 
 #: includes/class-yith-pre-order-my-account.php:108
-msgid "Availability date: "
+#: templates/emails/ywpo-product-table.php:44
+msgid "Availability date:"
 msgstr ""
 
 #: includes/class-yith-pre-order-my-account.php:168
@@ -196,26 +197,26 @@ msgstr ""
 msgid "My pre-orders"
 msgstr ""
 
-#: includes/emails/class-yith-pre-order-confirmed-email.php:44
+#: includes/emails/class-yith-pre-order-confirmed-email.php:30
 msgid "YITH Pre-Order: Pre-order confirmed"
 msgstr ""
 
-#: includes/emails/class-yith-pre-order-confirmed-email.php:47
+#: includes/emails/class-yith-pre-order-confirmed-email.php:33
 #. translators: %s: placeholders.
 msgid ""
 "Notifies the customer that the pre-order has been placed correctly. "
 "Available placeholders: %s"
 msgstr ""
 
-#: includes/emails/class-yith-pre-order-confirmed-email.php:51
+#: includes/emails/class-yith-pre-order-confirmed-email.php:37
 msgid "Your pre-order is confirmed"
 msgstr ""
 
-#: includes/emails/class-yith-pre-order-confirmed-email.php:52
+#: includes/emails/class-yith-pre-order-confirmed-email.php:38
 msgid "Your pre-order placed on {site_title} is confirmed"
 msgstr ""
 
-#: includes/emails/class-yith-pre-order-confirmed-email.php:53
+#: includes/emails/class-yith-pre-order-confirmed-email.php:39
 msgid ""
 "Hi {customer_name},\n"
 "\n"
@@ -230,78 +231,94 @@ msgid ""
 "{site_title}"
 msgstr ""
 
-#: includes/emails/class-yith-pre-order-confirmed-email.php:113
-#: includes/emails/class-yith-pre-order-new-pre-order-email.php:115
+#: includes/emails/class-yith-pre-order-confirmed-email.php:99
+#: includes/emails/class-yith-pre-order-new-pre-order-email.php:101
 msgid "at a future date"
 msgstr ""
 
-#: includes/emails/class-yith-pre-order-confirmed-email.php:165
-#: includes/emails/class-yith-pre-order-new-pre-order-email.php:163
+#: includes/emails/class-yith-pre-order-confirmed-email.php:154
+#: includes/emails/class-yith-pre-order-new-pre-order-email.php:153
 msgid "Enable/Disable"
 msgstr ""
 
-#: includes/emails/class-yith-pre-order-confirmed-email.php:167
-#: includes/emails/class-yith-pre-order-new-pre-order-email.php:165
+#: includes/emails/class-yith-pre-order-confirmed-email.php:156
+#: includes/emails/class-yith-pre-order-new-pre-order-email.php:155
 msgid "Enable this email notification"
 msgstr ""
 
-#: includes/emails/class-yith-pre-order-confirmed-email.php:171
-#: includes/emails/class-yith-pre-order-new-pre-order-email.php:177
+#: includes/emails/class-yith-pre-order-confirmed-email.php:160
+#: includes/emails/class-yith-pre-order-new-pre-order-email.php:167
 msgid "Subject"
 msgstr ""
 
-#: includes/emails/class-yith-pre-order-confirmed-email.php:174
-#: includes/emails/class-yith-pre-order-new-pre-order-email.php:180
+#: includes/emails/class-yith-pre-order-confirmed-email.php:163
+#: includes/emails/class-yith-pre-order-new-pre-order-email.php:170
 #. translators: %s: email subject.
 msgid ""
 "This controls the email subject line. Leave blank to use the default "
 "subject: <code>%s</code>"
 msgstr ""
 
-#: includes/emails/class-yith-pre-order-confirmed-email.php:179
-#: includes/emails/class-yith-pre-order-new-pre-order-email.php:185
+#: includes/emails/class-yith-pre-order-confirmed-email.php:168
+#: includes/emails/class-yith-pre-order-new-pre-order-email.php:175
 msgid "Email heading"
 msgstr ""
 
-#: includes/emails/class-yith-pre-order-confirmed-email.php:182
-#: includes/emails/class-yith-pre-order-new-pre-order-email.php:188
+#: includes/emails/class-yith-pre-order-confirmed-email.php:171
+#: includes/emails/class-yith-pre-order-new-pre-order-email.php:178
 #. translators: %s: email heading.
 msgid ""
 "This controls the main heading included in the email notification. Leave "
 "blank to use the default heading: <code>%s</code>"
 msgstr ""
 
-#: includes/emails/class-yith-pre-order-confirmed-email.php:187
-#: includes/emails/class-yith-pre-order-new-pre-order-email.php:193
+#: includes/emails/class-yith-pre-order-confirmed-email.php:176
+#: includes/emails/class-yith-pre-order-new-pre-order-email.php:183
 msgid "Email body"
 msgstr ""
 
-#: includes/emails/class-yith-pre-order-confirmed-email.php:190
-#: includes/emails/class-yith-pre-order-new-pre-order-email.php:196
+#: includes/emails/class-yith-pre-order-confirmed-email.php:179
+#: includes/emails/class-yith-pre-order-new-pre-order-email.php:186
 #. translators: %s: email body.
 msgid "Defaults to <code>%s</code>"
 msgstr ""
 
-#: includes/emails/class-yith-pre-order-new-pre-order-email.php:44
+#: includes/emails/class-yith-pre-order-email.php:104
+msgid "Direct bank transfer"
+msgstr ""
+
+#: includes/emails/class-yith-pre-order-email.php:105
+msgid ""
+"This is a customer note. Customers can add a note to their order on "
+"checkout.\n"
+"\n"
+"It can be multiple lines. If there’s no note, this section is hidden."
+msgstr ""
+
+#: includes/emails/class-yith-pre-order-email.php:123
+msgid "Pre-Order Product"
+msgstr ""
+
+#: includes/emails/class-yith-pre-order-new-pre-order-email.php:30
 msgid "YITH Pre-Order: New pre-order"
 msgstr ""
 
-#: includes/emails/class-yith-pre-order-new-pre-order-email.php:47
+#: includes/emails/class-yith-pre-order-new-pre-order-email.php:33
 #. translators: %s: placeholders.
 msgid ""
 "New pre-order emails are sent to chosen recipient(s) when a new pre-order "
 "is received. Available placeholders: %s"
 msgstr ""
 
-#: includes/emails/class-yith-pre-order-new-pre-order-email.php:51
+#: includes/emails/class-yith-pre-order-new-pre-order-email.php:37
 msgid "New pre-order"
 msgstr ""
 
-#: includes/emails/class-yith-pre-order-new-pre-order-email.php:52
+#: includes/emails/class-yith-pre-order-new-pre-order-email.php:38
 msgid "New pre-order received"
 msgstr ""
 
-#: includes/emails/class-yith-pre-order-new-pre-order-email.php:53
+#: includes/emails/class-yith-pre-order-new-pre-order-email.php:39
 msgid ""
 "Hi admin,\n"
 "\n"
@@ -314,11 +331,11 @@ msgid ""
 "{site_title}"
 msgstr ""
 
-#: includes/emails/class-yith-pre-order-new-pre-order-email.php:169
+#: includes/emails/class-yith-pre-order-new-pre-order-email.php:159
 msgid "Recipient(s)"
 msgstr ""
 
-#: includes/emails/class-yith-pre-order-new-pre-order-email.php:172
+#: includes/emails/class-yith-pre-order-new-pre-order-email.php:162
 #. translators: %s: email recipient.
 msgid "Enter recipients (comma separated) for this email. Defaults to %s."
 msgstr ""
@@ -533,10 +550,6 @@ msgstr ""
 msgid "Increase on selling price"
 msgstr ""
 
-#: templates/emails/ywpo-product-table.php:56
-msgid "Availability date:"
-msgstr ""
-
 #: templates/myaccount/ywpo-my-pre-orders.php:22
 #: templates/myaccount/ywpo-my-pre-orders.php:57
 msgid "Product"
@@ -563,11 +576,6 @@ msgid ""
 "they are officially on sale. <a href=\"https://yithemes.com/\" "
 "target=\"_blank\">Get more plugins for your e-commerce on "
 "<strong>YITH</strong></a>."
-msgstr ""
-
-#: includes/emails/class-yith-pre-order-confirmed-email.php:105
-msgctxt "WooCommerce shop order"
-msgid "Order"
 msgstr ""
 
 #: templates/myaccount/ywpo-my-pre-orders.php:67

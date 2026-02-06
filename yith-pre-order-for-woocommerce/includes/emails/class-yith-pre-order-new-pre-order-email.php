@@ -19,21 +19,7 @@ if ( ! class_exists( 'YITH_Pre_Order_New_Pre_Order_Email' ) ) {
 	/**
 	 * Class YITH_Pre_Order_New_Pre_Order_Email
 	 */
-	class YITH_Pre_Order_New_Pre_Order_Email extends WC_Email {
-
-		/**
-		 * Email content.
-		 *
-		 * @var string $email_body
-		 */
-		public $email_body;
-
-		/**
-		 * Email additional data.
-		 *
-		 * @var array $data
-		 */
-		public $data;
+	class YITH_Pre_Order_New_Pre_Order_Email extends YITH_Pre_Order_Email {
 
 		/**
 		 * Constructor.
@@ -104,7 +90,7 @@ if ( ! class_exists( 'YITH_Pre_Order_New_Pre_Order_Email' ) ) {
 
 			$order_link = apply_filters(
 				'ywpo_new_pre_order_email_order_link',
-				'<a href="' . $order->get_edit_order_url() . '">#' . $order->get_id() . '</a>',
+				'<a href="' . $order->get_edit_order_url() . '">#' . $order->get_order_number() . '</a>',
 				$order,
 				$product,
 				$item_id
@@ -139,8 +125,12 @@ if ( ! class_exists( 'YITH_Pre_Order_New_Pre_Order_Email' ) ) {
 		 * Get content html.
 		 *
 		 * @return string
+		 * @throws WC_Data_Exception Exception.
 		 */
 		public function get_content_html() {
+			if ( has_filter( 'woocommerce_is_email_preview' ) ) {
+				$this->data = $this->get_dummy_data();
+			}
 			return wc_get_template_html(
 				$this->template_html,
 				array(
