@@ -52,6 +52,8 @@ if ( ! class_exists( 'YITH_Pre_Order_Utils' ) ) {
 					$product = wc_get_product( $product_id );
 					if ( $product && $product->exists() ) {
 						YITH_Pre_Order_Frontend()->pre_orders[ $product_id ] = $product;
+					} else {
+						return $return;
 					}
 				}
 			}
@@ -142,7 +144,7 @@ if ( ! class_exists( 'YITH_Pre_Order_Utils' ) ) {
 		 * @return string
 		 */
 		public static function get_start_date( $product ) {
-			$timestamp  = $product->get_meta( '_ywpo_start_date' );
+			$timestamp  = self::get_start_date_timestamp( $product );
 			$start_date = ! empty( $timestamp ) ? get_date_from_gmt( gmdate( 'Y-m-d H:i:s', (int) $timestamp ) ) : '';
 
 			return apply_filters( 'ywpo_pre_order_get_start_date', $start_date, $product );
@@ -187,7 +189,7 @@ if ( ! class_exists( 'YITH_Pre_Order_Utils' ) ) {
 		 * @return string
 		 */
 		public static function get_for_sale_date( $product ) {
-			$timestamp     = $product->get_meta( '_ywpo_for_sale_date' );
+			$timestamp     = self::get_for_sale_date_timestamp( $product );
 			$for_sale_date = ! empty( $timestamp ) ? get_date_from_gmt( gmdate( 'Y-m-d H:i:s', (int) $timestamp ) ) : '';
 
 			return apply_filters( 'ywpo_pre_order_get_for_sale_date', $for_sale_date, $product );
