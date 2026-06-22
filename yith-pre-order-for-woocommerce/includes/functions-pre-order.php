@@ -127,7 +127,7 @@ if ( ! function_exists( 'ywpo_get_orders_by_customer' ) ) {
 	 */
 	function ywpo_get_orders_by_customer( $customer_id ) {
 		$statuses          = wc_get_order_statuses();
-		$excluded_statuses = apply_filters( 'ywpo_get_orders_by_customer_excluded_statuses', array( 'wc-cancelled', 'wc-refunded', 'wc-failed' ) );
+		$excluded_statuses = apply_filters( 'ywpo_get_orders_by_customer_excluded_statuses', array( 'wc-refunded', 'wc-failed' ) );
 		foreach ( $excluded_statuses as $excluded_status ) {
 			unset( $statuses[ $excluded_status ] );
 		}
